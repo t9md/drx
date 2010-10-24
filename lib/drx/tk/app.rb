@@ -120,6 +120,12 @@ module Drx
           state :readonly
           width 10
         }
+        @back_btn = TkButton.new(toplevel) {
+          text 'Back'
+        }
+        @back_btn.command {
+          navigate_back
+        }
         @save_btn = TkButton.new(toplevel) {
           text 'Save...'
         }
@@ -297,7 +303,9 @@ module Drx
         panes.add vbox(
           TkLabel.new(toplevel, :text => 'Object graph (klass and super):', :anchor => 'w'),
           [Scrolled.new(toplevel, @im), { :expand => true, :fill => 'both' } ],
-          hbox(TkLabel.new(toplevel, :text => 'Size: '), @graph_size_menu,
+          hbox(
+               [@back_btn, { :pady => 5 }],
+            TkLabel.new(toplevel, :text => 'Size: '), @graph_size_menu,
                separator,
                TkLabel.new(toplevel, :text => 'Style: '), @graph_style_menu,
                separator,
